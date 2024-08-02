@@ -40,6 +40,26 @@ export class BuyerRegisterComponent implements OnInit {
     this.buyerForm.controls['exempt'].valueChanges.subscribe(value => {
       this.isExempt = value;
     })
+
+    this.buyerForm.controls['personType'].valueChanges.subscribe(value => {
+      this.updateValidators(value);
+    });
+  }
+
+  updateValidators(personType: string) {
+    const genderControl = this.buyerForm.get('gender');
+    const birthDateControl = this.buyerForm.get('birthDate');
+
+    if (personType === 'Física') {
+      genderControl?.setValidators(Validators.required);
+      birthDateControl?.setValidators(Validators.required);
+    } else {
+      genderControl?.clearValidators();
+      birthDateControl?.clearValidators();
+    }
+
+    genderControl?.updateValueAndValidity();
+    birthDateControl?.updateValueAndValidity();
   }
 
   createBuyer(): void {

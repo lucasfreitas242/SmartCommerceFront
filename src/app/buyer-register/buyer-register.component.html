@@ -96,7 +96,7 @@
         </mat-form-field>
   
         <mat-checkbox formControlName="blocked">Bloqueado</mat-checkbox>
-        <mat-checkbox (change)="onCheckboxChange($event)">IE Isenta</mat-checkbox>
+        <mat-checkbox formControlName="exempt" (change)="onCheckboxChange($event)">IE Isenta</mat-checkbox>
 
         <button mat-raised-button color="primary" type="submit">Adicionar Cliente</button>
         </div>

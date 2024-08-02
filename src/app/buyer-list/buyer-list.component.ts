@@ -147,6 +147,7 @@ export class BuyerListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.loadBuyers();
     });
   }
 }

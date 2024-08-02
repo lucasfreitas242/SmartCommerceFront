@@ -53,7 +53,7 @@
 
       <mat-form-field class="form-field">
         <mat-label>Inscrição Estadual</mat-label>
-        <input matInput mask="0000.0000.0000.0000" maxlength="12" formControlName="stateRegistration" required>
+        <input matInput mask="0000.0000.0000" maxlength="14" formControlName="stateRegistration" required>
         <mat-error *ngIf="buyerForm.controls['stateRegistration'].hasError('required')">
           Campo obrigatório.
         </mat-error>
@@ -104,10 +104,10 @@
       </mat-form-field>
 
       <mat-checkbox formControlName="blocked">Bloqueado</mat-checkbox>
-      <mat-checkbox >IE Isenta</mat-checkbox>
+      <mat-checkbox formControlName="exempt" (change)="onCheckboxChange($event)" >IE Isenta</mat-checkbox>
 
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="buyerForm.value" [disabled]="buyerForm.invalid">Salvar</button>
+  <button mat-button [mat-dialog-close]="buyerForm.value" (click)="updateBuyer()">Salvar</button>
 </div>
