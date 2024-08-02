@@ -69,9 +69,12 @@ export class BuyerRegisterComponent implements OnInit {
         buyer.birthDate = Date.now;   
       }
 
-      this.buyerService.checkEmail(buyer.email).subscribe(response => {
-        if (response.exists) {
+      this.buyerService.validateFields(buyer).subscribe(response => {
+        if (response.emailExists) {
           this.snackBar.open('E-mail já está vinculado a outro Comprador.', 'Fechar', { duration: 3000 });
+          this.router.navigate(['/buyers']);
+        } else if (response.cpfCnpjExists) {
+          this.snackBar.open('CPF/CNPJ já está vinculado a outro Comprador.', 'Fechar', { duration: 3000 });
           this.router.navigate(['/buyers']);
         } else{
           this.buyerService.createBuyer(buyer).subscribe({

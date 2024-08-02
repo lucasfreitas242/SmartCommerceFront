@@ -40,8 +40,8 @@ export class BuyerService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  checkEmail(email: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/check-email/${email}`);
+  validateFields(buyer: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/validate-fields`, buyer);
   }
 
   isCpfCnpjRegistered(cpfCnpj: string): Observable<boolean> {
