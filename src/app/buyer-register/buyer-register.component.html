@@ -1,0 +1,113 @@
+<div class="form-container">
+    <h2>Cadastro de Comprador</h2>
+    <form [formGroup]="buyerForm" (ngSubmit)="onSubmit()">
+      <div class="main-section">
+        <mat-form-field class="form-field" class="form-field">
+          <mat-label>Nome do Cliente/Razão Social</mat-label>
+          <input matInput formControlName="name" maxlength="150" required>
+          <mat-error *ngIf="buyerForm.controls['name'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>E-Mail</mat-label>
+          <input matInput formControlName="email" maxlength="150" required email>
+          <mat-error *ngIf="buyerForm.controls['email'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+          <mat-error *ngIf="buyerForm.controls['email'].hasError('email')">
+            E-mail inválido.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="phone" maxlength="11" required>
+          <mat-error *ngIf="buyerForm.controls['phone'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="personal-info-section">
+        <mat-form-field class="form-field">
+          <mat-label>Tipo de Pessoa</mat-label>
+          <mat-select formControlName="personType" required>
+            <mat-option value="Física">Física</mat-option>
+            <mat-option value="Jurídica">Jurídica</mat-option>
+          </mat-select>
+          <mat-error *ngIf="buyerForm.controls['personType'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>CPF/CNPJ</mat-label>
+          <input matInput formControlName="cpfCnpj" required>
+          <mat-error *ngIf="buyerForm.controls['cpfCnpj'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Inscrição Estadual</mat-label>
+          <input matInput formControlName="stateRegistration" [disabled]="isExempt" required>
+          <mat-error *ngIf="buyerForm.controls['stateRegistration'].hasError('required') && !isExempt">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <div *ngIf="buyerForm.controls['personType'].value === 'Física'">
+          <mat-form-field class="form-field">
+            <mat-label>Gênero</mat-label>
+            <mat-select formControlName="gender" required>
+              <mat-option value="Feminino">Feminino</mat-option>
+              <mat-option value="Masculino">Masculino</mat-option>
+              <mat-option value="Outro">Outro</mat-option>
+            </mat-select>
+            <mat-error *ngIf="buyerForm.controls['gender'].hasError('required')">
+              Campo obrigatório.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field class="form-field">
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput formControlName="birthDate" [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="buyerForm.controls['birthDate'].hasError('required')">
+              Campo obrigatório.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="password-section">
+        <mat-form-field class="form-field">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" type="password" required>
+          <mat-error *ngIf="buyerForm.controls['password'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Confirmação de Senha</mat-label>
+          <input matInput formControlName="confirmPassword" type="password" required>
+          <mat-error *ngIf="buyerForm.controls['confirmPassword'].hasError('required')">
+            Campo obrigatório.
+          </mat-error>
+          <mat-error *ngIf="buyerForm.controls['confirmPassword'].hasError('notMatch')">
+            As senhas não conferem.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="blocked">Bloqueado</mat-checkbox>
+        <mat-checkbox formControlName="exempt" (change)="onExemptChange($event)">Isento</mat-checkbox>
+      </div>
+  
+      <button mat-raised-button color="primary" type="submit">Adicionar Cliente</button>
+    </form>
+  </div>
+  

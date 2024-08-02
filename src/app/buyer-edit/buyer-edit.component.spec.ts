@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuyerFormComponent } from './buyer-form.component';
+import { BuyerEditComponent } from './buyer-edit.component';
 
-describe('BuyerFormComponent', () => {
-  let component: BuyerFormComponent;
-  let fixture: ComponentFixture<BuyerFormComponent>;
+describe('BuyerEditComponent', () => {
+  let component: BuyerEditComponent;
+  let fixture: ComponentFixture<BuyerEditComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BuyerFormComponent]
+      declarations: [BuyerEditComponent]
     });
-    fixture = TestBed.createComponent(BuyerFormComponent);
+    fixture = TestBed.createComponent(BuyerEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

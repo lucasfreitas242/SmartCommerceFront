@@ -1,0 +1,27 @@
+/* buyer-register.component.css */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: auto;
+}
+
+.form-field {
+  margin-bottom: 16px;
+  gap: 16px;
+  padding-right: 10px;
+}
+
+.flex-row {
+  display: flex;
+  gap: 16px;
+}
+
+.flex-column {
+  flex: 1;
+}
+
+.form-button {
+  display: flex;
+  justify-content: flex-end;
+}

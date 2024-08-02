@@ -1,0 +1,49 @@
+<mat-expansion-panel hideToggle [expanded]="showFilter">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtrar Compradores
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome/Razão Social</mat-label>
+        <input matInput formControlName="name" placeholder="Nome ou Razão Social">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone" placeholder="Telefone">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de Pessoa</mat-label>
+        <mat-select formControlName="personType">
+          <mat-option value="Física">Física</mat-option>
+          <mat-option value="Jurídica">Jurídica</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input matInput formControlName="cpfCnpj" placeholder="CPF ou CNPJ">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Inscrição Estadual</mat-label>
+        <input matInput formControlName="stateRegistration" placeholder="Inscrição Estadual">
+      </mat-form-field>
+  
+      <mat-checkbox formControlName="blocked">Bloqueado</mat-checkbox>
+  
+      <div class="filter-actions">
+        <button mat-raised-button color="primary" type="submit">Aplicar Filtro</button>
+        <button mat-raised-button color="warn" type="button" (click)="clearFilter()">Limpar</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+  
