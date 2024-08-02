@@ -82,6 +82,15 @@
           <mat-error *ngIf="buyerForm.controls['password'].hasError('required')">
             Campo obrigatório.
           </mat-error>
+          <mat-error *ngIf="buyerForm.controls['password'].hasError('notMatch')">
+            As senhas não conferem.
+          </mat-error>
+          <mat-error *ngIf="buyerForm.controls['password'].hasError('minLength')">
+            A senha deve ter no mínimo 8 caracteres
+          </mat-error>
+          <mat-error *ngIf="buyerForm.controls['password'].hasError('maxlength')">
+            A senha deve ter no máximo 15 caracteres
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field class="form-field">
@@ -89,9 +98,6 @@
           <input matInput formControlName="confirmPassword" type="password" required>
           <mat-error *ngIf="buyerForm.controls['confirmPassword'].hasError('required')">
             Campo obrigatório.
-          </mat-error>
-          <mat-error *ngIf="buyerForm.controls['confirmPassword'].hasError('notMatch')">
-            As senhas não conferem.
           </mat-error>
         </mat-form-field>
   

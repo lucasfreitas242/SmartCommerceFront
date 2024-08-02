@@ -68,16 +68,24 @@ export class BuyerRegisterComponent implements OnInit {
       if (buyer.birthDate === null){
         buyer.birthDate = Date.now;   
       }
-      this.buyerService.createBuyer(buyer).subscribe({
-        next: (response) => {
-          this.snackBar.open('Comprador criado com sucesso!', 'Fechar', { duration: 3000 });
+
+      this.buyerService.checkEmail(buyer.email).subscribe(response => {
+        if (response.exists) {
+          this.snackBar.open('E-mail já está vinculado a outro Comprador.', 'Fechar', { duration: 3000 });
           this.router.navigate(['/buyers']);
-        },
-        error: (err) => {
-          this.snackBar.open('Erro ao criar comprador. Tente novamente.', 'Fechar', { duration: 3000 });
-          console.error('Erro ao criar comprador', err);
+        } else{
+          this.buyerService.createBuyer(buyer).subscribe({
+            next: (response) => {
+              this.snackBar.open('Comprador criado com sucesso!', 'Fechar', { duration: 3000 });
+              this.router.navigate(['/buyers']);
+            },
+            error: (err) => {
+              this.snackBar.open('Erro ao criar comprador. Tente novamente.', 'Fechar', { duration: 3000 });
+              console.error('Erro ao criar comprador', err);
+            }
+          });
         }
-      });
+      })  
     } else {
       this.snackBar.open('Por favor, preencha todos os campos obrigatórios.', 'Fechar', { duration: 3000 });
     }
@@ -116,7 +124,14 @@ export class BuyerRegisterComponent implements OnInit {
   }
 
   passwordMatchValidator(form: FormGroup) {
-    return form.controls['password'].value === form.controls['confirmPassword'].value ? null : { notMatch: true };
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      form.get('password')?.setErrors({ notMatch: true });
+    } else {
+      form.get('password')?.setErrors(null);
+    }
+    return null;
   }
 
   onSubmit() {
