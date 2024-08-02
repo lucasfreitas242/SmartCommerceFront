@@ -30,6 +30,7 @@ import { BuyerRegisterComponent } from './buyer-register/buyer-register.componen
 import { BuyerFilterComponent } from './buyer-filter/buyer-filter.component';
 import { BuyerEditComponent } from './buyer-edit/buyer-edit.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatPaginatorModule,
+    HttpClientModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,

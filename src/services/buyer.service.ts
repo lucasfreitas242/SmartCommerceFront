@@ -8,19 +8,24 @@ import { Buyer } from '../app/models/buyer/buyer.model';
   providedIn: 'root'
 })
 export class BuyerService {
-  private apiUrl = `${environment.apiUrl}/buyers`; 
+  private apiUrl = `${environment.apiUrl}/Buyers`; 
 
   constructor(private http: HttpClient) {}
 
-  getBuyers(page: number = 1, pageSize: number = 20): Observable<Buyer[]> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('pageSize', pageSize.toString());
-    return this.http.get<Buyer[]>(this.apiUrl, { params });
+  getBuyers(): Observable<Buyer[]> {
+    return this.http.get<Buyer[]>(this.apiUrl);
   }
 
-  getBuyerById(id: number): Observable<Buyer> {
-    return this.http.get<Buyer>(`${this.apiUrl}/${id}`);
+  filterBuyers(filter: any): Observable<Buyer[]> {
+    let params = new HttpParams();
+    
+    for (const key in filter) {
+      if (filter[key]) {
+        params = params.set(key, filter[key]);
+      }
+    }
+    
+    return this.http.get<Buyer[]>(`${this.apiUrl}/filter`, { params });
   }
 
   createBuyer(buyer: Buyer): Observable<Buyer> {

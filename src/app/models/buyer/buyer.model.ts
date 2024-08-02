@@ -1,5 +1,5 @@
 export interface Buyer {
-    id: number;
+    id: string; //Mudar para String (Guid na API)
     name: string;
     email: string;
     phone: string;
@@ -7,5 +7,11 @@ export interface Buyer {
     document: string;
     stateRegistration: string;
     personType: string;
+    gender?: string;
+    birthDate: Date;
     blocked: boolean;
+    exempt: boolean;
+    password?: string;
+    confirmPassword?: string;
+    createdAt: Date;
   }

@@ -1,80 +1,80 @@
 <div class="container">
-    <div class="header">
-      <h2>Consulte os seus Clientes cadastrados na sua Loja ou realize o cadastro de novos Cliente</h2>
-      <button mat-raised-button color="primary" routerLink="/buyers/add" class="add-button">Adicionar Cliente</button>
-    </div>
-  
-    <div class="filter-section">
-      <button mat-raised-button *ngIf="!showFilter" color="accent" (click)="toggleFilter()">Filtrar</button>
-      <button mat-raised-button *ngIf="showFilter" color="accent" (click)="toggleFilter()">Fechar Filtro</button>
-    </div>
-
-    <app-buyer-filter *ngIf="showFilter" [showFilter]="showFilter" (filterApplied)="onFilterApplied($event)"></app-buyer-filter>
-
-    <div class="div table-container">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Checkbox Column -->
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let buyer">
-                <mat-checkbox (change)="toggleSelection(buyer)" [checked]="selectedBuyers.includes(buyer)"></mat-checkbox>
-              </td>
-            </ng-container>
-        
-            <!-- Name/Razão Social Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Nome/Razão Social </th>
-              <td mat-cell *matCellDef="let buyer">
-                {{ buyer.name }}
-              </td>
-            </ng-container>
-        
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> E-mail </th>
-              <td mat-cell *matCellDef="let buyer">
-                {{ buyer.email }}
-              </td>
-            </ng-container>
-        
-            <!-- Phone Column -->
-            <ng-container matColumnDef="phone">
-              <th mat-header-cell *matHeaderCellDef> Telefone </th>
-              <td mat-cell *matCellDef="let buyer">
-                {{ buyer.phone }}
-              </td>
-            </ng-container>
-        
-            <!-- Date Column -->
-            <ng-container matColumnDef="date">
-              <th mat-header-cell *matHeaderCellDef> Data de Cadastro </th>
-              <td mat-cell *matCellDef="let buyer">
-                {{ buyer.date }}
-              </td>
-            </ng-container>
-        
-            <!-- Blocked Column -->
-            <ng-container matColumnDef="blocked">
-              <th mat-header-cell *matHeaderCellDef> Bloqueado </th>
-              <td mat-cell *matCellDef="let buyer">
-                <mat-checkbox disabled [(ngModel)]="buyer.blocked"></mat-checkbox>
-              </td>
-            </ng-container>
-        
-            <!-- Actions Column -->
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef> Ações </th>
-              <td mat-cell *matCellDef="let buyer">
-                <button mat-button (click)="openEditDialog(buyer)">Editar</button>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-    </div>
-  
-    <mat-paginator [pageSize]="pageSize" [pageIndex]="page - 1" [length]="buyers.length"></mat-paginator>
+  <div class="header">
+    <h2>Consulte os seus Clientes cadastrados na sua Loja ou realize o cadastro de novos Cliente</h2>
+    <button mat-raised-button color="primary" routerLink="/buyers/add" class="add-button">Adicionar Cliente</button>
   </div>
+
+  <div class="filter-section">
+    <button mat-raised-button *ngIf="!showFilter" color="accent" (click)="toggleFilter()">Filtrar</button>
+    <button mat-raised-button *ngIf="showFilter" color="accent" (click)="toggleFilter()">Fechar Filtro</button>
+  </div>
+
+  <app-buyer-filter *ngIf="showFilter" [showFilter]="showFilter" (filterCleaned)="clearFilter()" (filterApplied)="applyFilter($event)"></app-buyer-filter>
+
+  <div class="div table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let buyer">
+          <mat-checkbox (change)="toggleSelection(buyer)" [checked]="selectedBuyers.includes(buyer)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name/Razão Social Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome/Razão Social </th>
+        <td mat-cell *matCellDef="let buyer">
+          {{ buyer.name }}
+        </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+        <td mat-cell *matCellDef="let buyer">
+          {{ buyer.email }}
+        </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Telefone </th>
+        <td mat-cell *matCellDef="let buyer">
+          {{ buyer.phone }}
+        </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Data de Cadastro </th>
+        <td mat-cell *matCellDef="let buyer">
+          {{ buyer.createdAt | date:'dd/MM/yyyy' }} <!-- Usando o pipe date para formatar a data -->
+        </td>
+      </ng-container>
+
+      <!-- Blocked Column -->
+      <ng-container matColumnDef="blocked">
+        <th mat-header-cell *matHeaderCellDef> Bloqueado </th>
+        <td mat-cell *matCellDef="let buyer">
+          <mat-checkbox disabled [(ngModel)]="buyer.blocked"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let buyer">
+          <button mat-button (click)="openEditDialog(buyer)">Editar</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSize]="pageSize" [pageIndex]="page - 1" [length]="buyers.length"></mat-paginator>
+</div>

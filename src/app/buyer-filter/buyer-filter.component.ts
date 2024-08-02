@@ -12,6 +12,7 @@ export class BuyerFilterComponent {
   @Input() showFilter: boolean = false;
 
   @Output() filterApplied = new EventEmitter<any>();
+  @Output() filterCleaned = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {
     this.filterForm = this.fb.group({
@@ -19,7 +20,7 @@ export class BuyerFilterComponent {
       email: [''],
       phone: [''],
       personType: [''],
-      cpfCnpj: [''],
+      document: [''],
       stateRegistration: [''],
       blocked: [false]
     });
@@ -31,5 +32,6 @@ export class BuyerFilterComponent {
 
   clearFilter() {
     this.filterForm.reset();
+    this.filterCleaned.emit(this.filterForm.value);
   }
 }
