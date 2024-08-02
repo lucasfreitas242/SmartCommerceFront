@@ -26,7 +26,6 @@ export class BuyerEditComponent implements OnInit {
     private dialogRef: MatDialogRef<BuyerEditComponent>,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    // private buyerService: BuyerService
   ) {
     this.buyerData = data.buyer;
 
@@ -62,21 +61,19 @@ export class BuyerEditComponent implements OnInit {
 
   onCpfCnpjBlur(event: any) {
     const value = event.target.value;
-    const numericValue = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const numericValue = value.replace(/\D/g, ''); 
 
-    // Define a máscara com base na quantidade de caracteres
     if (numericValue.length > 11) {
-      this.mask = '00.000.000/0000-00'; // Máscara para CNPJ
+      this.mask = '00.000.000/0000-00'; 
     } else if (numericValue.length > 0) {
-      this.mask = '000.000.000-00'; // Máscara para CPF
+      this.mask = '000.000.000-00'; 
     } else {
-      this.mask = ''; // Sem máscara se o campo estiver vazio
+      this.mask = ''; 
     }
   }
 
-  // Caso queira limpar a máscara ao focar novamente
   onCpfCnpjFocus(event: any) {
-    this.mask = ''; // Remove a máscara ao focar
+    this.mask = ''; 
   }
 
   updateBuyer(): void {
@@ -86,12 +83,12 @@ export class BuyerEditComponent implements OnInit {
       //   this.snackBar.open('Comprador atualizado com sucesso!', 'Fechar', {
       //     duration: 3000
       //   });
-      //   this.dialogRef.close(); // Fechar o diálogo
+      //   this.dialogRef.close(); 
       // });
     }
   }
 
   onNoClick(): void {
-    this.dialogRef.close(); // Fechar o diálogo
+    this.dialogRef.close(); 
   }
 }

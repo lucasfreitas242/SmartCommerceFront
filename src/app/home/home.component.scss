@@ -14,7 +14,6 @@ mat-sidenav-container {
     height:100%;
 }
 
-// Move the content down so that it won't be hidden by the toolbar
 mat-sidenav {
     padding-top: 3.5rem;
     @media screen and (min-width: 600px) {
@@ -29,7 +28,6 @@ mat-sidenav {
     }
   }
 
-// Move the content down so that it won't be hidden by the toolbar
 mat-sidenav-content{
     padding-top: 3.5rem;
     @media screen and (min-width: 600px) {

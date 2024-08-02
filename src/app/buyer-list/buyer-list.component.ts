@@ -13,9 +13,9 @@ import { BuyerEditComponent } from '../buyer-edit/buyer-edit.component';
 })
 export class BuyerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  buyers: Buyer[] = []; // Definir o tipo do array como Buyer[]
+  buyers: Buyer[] = []; 
   dataSource = new MatTableDataSource<Buyer>(this.buyers);
-  selectedBuyers: Buyer[] = []; // Definir o tipo do array como Buyer[]
+  selectedBuyers: Buyer[] = []; 
   page = 1;
   pageSize = 20;
   displayedColumns: string[] = ['select', 'name', 'email', 'phone', 'date', 'blocked', 'actions'];
